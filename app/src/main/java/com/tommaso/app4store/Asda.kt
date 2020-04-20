@@ -1,38 +1,55 @@
 package com.tommaso.app4store
-
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import java.io.IOException
-
-class Asda {
-    fun doSomething() {
-        val client = OkHttpClient()
-        val mediaType: MediaType? = "application/x-www-form-urlencoded".toMediaTypeOrNull()
-        val body = RequestBody.create(
-            mediaType,
-            "text=After%20living%20abroad%20for%20such%20a%20long%20time%2C%20seeing%20my%20family%20was%20the%20best%20present%20I%20could%20have%20ever%20wished%20for."
-        )
-        val request = Request.Builder()
-            .url("https://twinword-emotion-analysis-v1.p.rapidapi.com/analyze/")
-            .post(body)
-            .addHeader("x-rapidapi-host", "twinword-emotion-analysis-v1.p.rapidapi.com")
-            .addHeader("x-rapidapi-key", "053de9ea63msh610c0fe50a7e40fp1c89f0jsn6d16b9752791")
-            .addHeader("content-type", "application/x-www-form-urlencoded")
-            .build()
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(
-                call: Call,
-                e: IOException
-            ) {
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(
-                call: Call,
-                response: Response
-            ) {
-            }
-        })
-        val response = client.newCall(request).execute()
-    }
-}
+//
+//import android.graphics.Color
+//import com.github.mikephil.charting.data.PieData
+//import com.github.mikephil.charting.data.PieDataSet
+//import com.github.mikephil.charting.data.PieEntry
+//import com.github.mikephil.charting.formatter.PercentFormatter
+//import com.github.mikephil.charting.utils.ColorTemplate
+//import com.github.mikephil.charting.utils.MPPointF
+//import java.util.*
+//
+//class Asda {
+//    private fun setData(count: Int, range: Float) {
+//        val entries = ArrayList<PieEntry>()
+//
+//        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+//        // the chart.
+//        for (i in 0 until count) {
+//            entries.add(
+//                PieEntry(
+//                    (Math.random() * range + range / 5).toFloat(),
+//                    parties.get(i % parties.length),
+//                    getResources().getDrawable(R.drawable.star)
+//                )
+//            )
+//        }
+//        val dataSet = PieDataSet(entries, "Election Results")
+//        dataSet.setDrawIcons(false)
+//        dataSet.sliceSpace = 3f
+//        dataSet.iconsOffset = MPPointF(0, 40)
+//        dataSet.selectionShift = 5f
+//
+//        // add a lot of colors
+//        val colors = ArrayList<Int>()
+//        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
+//        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+//        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+//        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+//        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+//        colors.add(ColorTemplate.getHoloBlue())
+//        dataSet.colors = colors
+//        //dataSet.setSelectionShift(0f);
+//        val data = PieData(dataSet)
+//        data.setValueFormatter(PercentFormatter(chart))
+//        data.setValueTextSize(11f)
+//        data.setValueTextColor(Color.WHITE)
+//        // data.setValueTypeface(tfLight);
+////        chart.setData(data);
+////
+////        // undo all highlights
+////        chart.highlightValues(null);
+////
+////        chart.invalidate();
+//    }
+//}

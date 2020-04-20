@@ -1,5 +1,6 @@
 package com.tommaso.app4store
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
+
+    public val EMOTION_KEY: String="EMOTION_KEY"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +70,19 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(applicationContext, stringResponse, Toast.LENGTH_LONG)
                         .show()
+                    goToResult(stringResponse)
                 }
 
             }
         })
+    }
+
+    fun goToResult(data: String?){
+        val intent = Intent(this,ResultActivity::class.java)
+        var extras=Bundle()
+        extras.putString(EMOTION_KEY,data)
+        intent.putExtras(extras)
+        startActivity(intent)
     }
 }
 
