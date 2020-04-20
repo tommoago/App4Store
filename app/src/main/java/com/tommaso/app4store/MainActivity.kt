@@ -2,6 +2,7 @@ package com.tommaso.app4store
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
@@ -15,17 +16,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var textToFind:String
+        var textToFind: String
         var testo = findViewById(R.id.testo) as TextInputEditText
         var textButton = findViewById(R.id.textButton) as Button
         textButton.setOnClickListener {
-            textToFind=testo.text.toString()
-            Toast.makeText(this,textToFind,Toast.LENGTH_LONG).show()
+            textToFind = testo.text.toString()
+            Toast.makeText(this, textToFind, Toast.LENGTH_LONG).show()
+            analizeText(textToFind)
         }
 
     }
 
-    fun analizeText(text:String){
+    fun analizeText(text: String) {
 
         val client = OkHttpClient()
         val mediaType: MediaType? = "application/x-www-form-urlencoded".toMediaTypeOrNull()
@@ -36,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         val request = Request.Builder()
             .url("https://twinword-emotion-analysis-v1.p.rapidapi.com/analyze/")
             .post(body)
+//            .addHeader("x-rapidapi-host", "twinword-emotion-analysis-v1.p.rapidapi.com")
+//            .addHeader("x-rapidapi-key", "053de9ea63msh610c0fe50a7e40fp1c89f0jsn6d16b9752791")
+//            .addHeader("x-rapidapi-subscription", "FREE")
+//            .addHeader("x-rapidapi-user", "tommo.ago")
+//            .addHeader("Key", "f0796c1ffcmsh677fa61536b75bfp1ea37bjsn537abc1b3fd6")
+//            .addHeader("content-type", "application/x-www-form-urlencoded")
             .addHeader("x-rapidapi-host", "twinword-emotion-analysis-v1.p.rapidapi.com")
             .addHeader("x-rapidapi-key", "053de9ea63msh610c0fe50a7e40fp1c89f0jsn6d16b9752791")
             .addHeader("content-type", "application/x-www-form-urlencoded")
@@ -46,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 call: Call,
                 e: IOException
             ) {
+                Log.d("asda", "errore: ", e)
             }
 
             @Throws(IOException::class)
@@ -53,7 +62,13 @@ class MainActivity : AppCompatActivity() {
                 call: Call,
                 response: Response
             ) {
-                Toast.makeText(applicationContext,response.body.toString(),Toast.LENGTH_LONG).show()
+                var stringResponse = response.body?.string()
+                Log.d("asda", "andata a buon fine " + stringResponse)
+                runOnUiThread {
+                    Toast.makeText(applicationContext, stringResponse, Toast.LENGTH_LONG)
+                        .show()
+                }
+
             }
         })
     }
