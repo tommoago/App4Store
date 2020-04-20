@@ -14,7 +14,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
 
-    public val EMOTION_KEY: String="EMOTION_KEY"
+    public val EMOTION_KEY: String = "EMOTION_KEY"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun analizeText(text: String) {
-
+        goToResult(
+            "   {\"emotions_detected\":[\"joy\"],\n" +
+                    "         \"emotion_scores\":{\"joy\":0.1345922573875,\"sadness\":0.022857406778851,\"surprise\":0.0087088390785547,\"disgust\":0,\"anger\":0,\"fear\":0},\n" +
+                    "         \"version\":\"7.0.0\",\n" +
+                    "         \"author\":\"twinword inc.\",\n" +
+                    "         \"email\":\"help@twinword.com\",\n" +
+                    "         \"result_code\":\"200\",\n" +
+                    "         \"result_msg\":\"Success\"}"
+        )
+        return
         val client = OkHttpClient()
         val mediaType: MediaType? = "application/x-www-form-urlencoded".toMediaTypeOrNull()
         val body = RequestBody.create(
@@ -77,10 +86,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun goToResult(data: String?){
-        val intent = Intent(this,ResultActivity::class.java)
-        var extras=Bundle()
-        extras.putString(EMOTION_KEY,data)
+    fun goToResult(data: String?) {
+        val intent = Intent(this, ResultActivity::class.java)
+        var extras = Bundle()
+        extras.putString(EMOTION_KEY, data)
         intent.putExtras(extras)
         startActivity(intent)
     }

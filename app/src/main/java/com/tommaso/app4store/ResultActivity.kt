@@ -38,13 +38,13 @@ class ResultActivity : AppCompatActivity() {
         var disgust=emotionScores.getDouble("disgust")
 
 
-        //{"emotions_detected":["joy"],
-        // "emotion_scores":{"joy":0.1345922573875,"sadness":0.022857406778851,"surprise":0.0087088390785547,"disgust":0,"anger":0,"fear":0},
-        // "version":"7.0.0",
-        // "author":"twinword inc.",
-        // "email":"help@twinword.com",
-        // "result_code":"200",
-        // "result_msg":"Success"}
+//        {"emotions_detected":["joy"],
+//         "emotion_scores":{"joy":0.1345922573875,"sadness":0.022857406778851,"surprise":0.0087088390785547,"disgust":0,"anger":0,"fear":0},
+//         "version":"7.0.0",
+//         "author":"twinword inc.",
+//         "email":"help@twinword.com",
+//         "result_code":"200",
+//         "result_msg":"Success"}
 
 
         pieChart = findViewById(R.id.pieChart)
