@@ -1,9 +1,11 @@
 package com.tommaso.app4store
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -43,6 +45,7 @@ class ResultActivity : AppCompatActivity() {
             // necessary to get single selection working
             chip.isClickable = true
             chip.isCheckable = true
+            chip.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccent))
             chipGroup.addView(chip)
         }
 
@@ -115,7 +118,7 @@ class ResultActivity : AppCompatActivity() {
         entries.add(PieEntry(disgust.toFloat(), "disgust"))
         entries.add(PieEntry(anger.toFloat(), "anger"))
         entries.add(PieEntry(fear.toFloat(), "fear"))
-        var dataSet: PieDataSet = PieDataSet(entries, "Election Results")
+        var dataSet: PieDataSet = PieDataSet(entries, "Emotions")
         val colors = ArrayList<Int>()
         for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
         for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
@@ -129,56 +132,3 @@ class ResultActivity : AppCompatActivity() {
 
 
 }
-
-/* chart = findViewById(R.id.chart1);
-        chart.setUsePercentValues(true);
-        chart.getDescription().setEnabled(false);
-        chart.setExtraOffsets(5, 10, 5, 5);
-
-        chart.setDragDecelerationFrictionCoef(0.95f);
-
-        chart.setCenterTextTypeface(tfLight);
-        chart.setCenterText(generateCenterSpannableText());
-
-        chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.WHITE);
-
-        chart.setTransparentCircleColor(Color.WHITE);
-        chart.setTransparentCircleAlpha(110);
-
-        chart.setHoleRadius(58f);
-        chart.setTransparentCircleRadius(61f);
-
-        chart.setDrawCenterText(true);
-
-        chart.setRotationAngle(0);
-        // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
-        chart.setHighlightPerTapEnabled(true);
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-        chart.setOnChartValueSelectedListener(this);
-
-        seekBarX.setProgress(4);
-        seekBarY.setProgress(10);
-
-        chart.animateY(1400, Easing.EaseInOutQuad);
-        // chart.spin(2000, 0, 360);
-
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-
-        // entry label styling
-        chart.setEntryLabelColor(Color.WHITE);
-        chart.setEntryLabelTypeface(tfRegular);
-        chart.setEntryLabelTextSize(12f);
-        */
