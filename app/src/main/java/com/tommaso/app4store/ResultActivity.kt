@@ -12,6 +12,9 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.ArrayList
 
@@ -19,14 +22,32 @@ class ResultActivity : AppCompatActivity() {
 
     lateinit var pieChart: PieChart
     public val EMOTION_KEY: String = "EMOTION_KEY"
+    lateinit var chipGroup:ChipGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
         val result: String = intent.extras?.get(EMOTION_KEY).toString()
 
+        chipGroup=findViewById(R.id.chipGroup)
+
         var json: JSONObject = JSONObject(result)
         Toast.makeText(this, json.getString("emotions_detected"), Toast.LENGTH_LONG).show()
+
+        var emotions_detected:JSONArray=json.getJSONArray("emotions_detected")
+
+        for (i in 0..(emotions_detected.length()-1)) {
+            val chip = Chip(chipGroup.context)
+            chip.text= emotions_detected.getString(i)
+
+            // necessary to get single selection working
+            chip.isClickable = true
+            chip.isCheckable = true
+            chipGroup.addView(chip)
+        }
+
+
+
 
         var emotionScores=json.getJSONObject("emotion_scores")
 
